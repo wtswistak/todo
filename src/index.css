@@ -1,0 +1,31 @@
+:root {
+  --theme-color: #343a40;
+  --bg-layout: #232d3f;
+  --light-color: #343f4d;
+}
+
+body {
+  background-color: var(--theme-color);
+  height: 100%;
+  color: #fff;
+}
+
+.custom-input::placeholder {
+  color: #9b9b9b;
+}
+.custom-input:focus {
+  box-shadow: none;
+}
+@media (min-width: 576px) {
+  .custom-layout {
+    border-radius: 1rem;
+    height: auto;
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 576px) {
+  .custom-layout {
+    height: 100vh;
+  }
+}

@@ -1,19 +1,18 @@
-import { useState } from "react";
-import Button from "react-bootstrap/Button";
+import AppLayout from "./Layouts/AppLayout";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Form from "./components/Form";
 
-function App() {
-  const [count, setCount] = useState(0);
-
+const App = () => {
   return (
-    <>
-      <p className="p-4 m-4">
-        <Button variant="primary" onClick={() => setCount(count + 1)}>
-          You clicked {count} times
-        </Button>
-        Cldick on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route index element={<Form />} />
+          <Route path="add-task" element={<Form />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

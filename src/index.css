@@ -1,37 +1,56 @@
 :root {
-  --theme-color: #343a40;
-  --bg-layout: #232d3f;
-  --light-color: #343f4d;
+  --clr-primary: #232d3f;
+  --clr-primary-light: #394252;
+  --clr-primary-dark: #1e2633;
 }
-
-body {
-  background-color: var(--theme-color);
+html {
   height: 100%;
+}
+body {
+  padding-top: 3rem;
+  background-image: linear-gradient(
+    110.3deg,
+    rgba(73, 93, 109, 1) 4.3%,
+    rgba(49, 55, 82, 1) 96.7%
+  );
   color: #fff;
+  height: 100%;
 }
 a {
   text-decoration: none;
 }
 
 .custom-input::placeholder {
-  color: #9b9b9b;
+  color: #adadad;
 }
 .custom-input:focus {
   box-shadow: none;
 }
 .nav-link {
+  color: #e4e4e4;
+  font-size: 14px;
   font-weight: 600;
-  padding: 0.2rem;
+  padding: 0.7rem 1.2rem;
+  background-color: var(--secondary-color);
+}
+.nav-link:hover {
+  background-color: var(--clr-primary);
 }
 @media (min-width: 576px) {
   .custom-layout {
-    border-radius: 1rem;
+    border-radius: 0.375rem;
     height: auto;
-    min-height: 70vh;
+    min-height: 80vh;
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 575px) {
+  body {
+    padding-top: 0;
+  }
+  .header {
+    border-radius: 0 !important;
+  }
   .custom-layout {
     height: 100vh;
   }

@@ -27,21 +27,21 @@ const Form: React.FC = () => {
       <FormBs.Control
         type="text"
         placeholder="Add new task"
-        className="rounded-0 border-0 text-light custom-input"
-        style={{ backgroundColor: "var(--light-color)" }}
+        className="rounded-0 border-0 text-light custom-input "
+        style={{ backgroundColor: "var(--clr-primary-light)" }}
         onChange={(e) => setInputValue(e.target.value)}
         required
         minLength={4}
       />
       <div
         className="px-2 py-1"
-        style={{ backgroundColor: "var(--light-color)" }}
+        style={{ backgroundColor: "var(--clr-primary-light)" }}
       >
         <Button
           variant="primary"
           type="submit"
           className="rounded-0 font-weight-bold p-0"
-          style={{ backgroundColor: "var(--light-color)", border: "none" }}
+          style={{ backgroundColor: "inherit", border: "none" }}
           onClick={handleAddTask}
         >
           <MdAdd size={"32px"} />

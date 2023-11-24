@@ -1,8 +1,12 @@
 :root {
   --clr-primary: #232d3f;
-  --clr-primary-light: #394252;
+  --clr-primary-light: #3d4857;
   --clr-primary-dark: #1e2633;
+  --clr-secondary: #005b41;
+  --clr-text: #b3c0d1;
+  --clr-text-light: #c2cdda;
 }
+
 html {
   height: 100%;
 }
@@ -13,28 +17,51 @@ body {
     rgba(73, 93, 109, 1) 4.3%,
     rgba(49, 55, 82, 1) 96.7%
   );
-  color: #fff;
+  color: var(--clr-text-light);
   height: 100%;
 }
 a {
   text-decoration: none;
 }
-
+h5 {
+  color: var(--clr-text);
+  margin-bottom: 10px;
+}
 .custom-input::placeholder {
-  color: #adadad;
+  color: rgba(196, 207, 223, 0.37);
+}
+.custom-input {
+  outline: var(--clr-primary-light) solid 1px;
 }
 .custom-input:focus {
   box-shadow: none;
+  transition: all ease-in-out 0.2s;
+  outline: #7d8692 solid 1px;
 }
 .nav-link {
-  color: #e4e4e4;
+  color: #e6e6e6;
   font-size: 14px;
   font-weight: 600;
   padding: 0.7rem 1.2rem;
-  background-color: var(--secondary-color);
 }
 .nav-link:hover {
   background-color: var(--clr-primary);
+  color: #e6e6e6;
+}
+.radio-custom {
+  margin-right: 0.4rem;
+  font-size: 12px;
+}
+label {
+  margin-bottom: 0px !important;
+}
+.btn-custom {
+  background-color: #426caa;
+  font-size: 14px;
+  border: none;
+}
+.btn-custom:hover {
+  background-color: #3b6199;
 }
 @media (min-width: 576px) {
   .custom-layout {

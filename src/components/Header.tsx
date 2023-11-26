@@ -3,14 +3,14 @@ import { NavLink } from "react-router-dom";
 const Header = () => {
   return (
     <div
-      className="d-flex mb-4 px-sm-5 rounded-top px-4 justify-content-between header"
+      className="d-flex mb-5 px-sm-5 rounded-top px-2 justify-content-between header"
       style={{ backgroundColor: "var(--clr-primary-dark)" }}
     >
       <div className="d-flex">
         <NavLink to="/add-task" className="nav-link ">
           Add Task
         </NavLink>
-        <NavLink to="/list" className="nav-link">
+        <NavLink to="/list-task" className="nav-link">
           List
         </NavLink>
       </div>

@@ -2,7 +2,7 @@
   --clr-primary: #232d3f;
   --clr-primary-light: #3d4857;
   --clr-primary-dark: #1e2633;
-  --clr-secondary: #005b41;
+  --clr-secondary: #426caa;
   --clr-text: #b3c0d1;
   --clr-text-light: #c2cdda;
 }
@@ -19,6 +19,9 @@ body {
   );
   color: var(--clr-text-light);
   height: 100%;
+}
+p {
+  margin: 0;
 }
 a {
   text-decoration: none;
@@ -56,13 +59,34 @@ label {
   margin-bottom: 0px !important;
 }
 .btn-custom {
-  background-color: #426caa;
+  background-color: var(--clr-secondary);
   font-size: 14px;
   border: none;
 }
 .btn-custom:hover {
   background-color: #3b6199;
 }
+
+.custom-item {
+  background-color: #1e2633;
+}
+.priority {
+  color: green;
+  height: 16px;
+  width: 16px;
+  border-radius: 160px;
+  border: 2px solid green;
+}
+.priority-high {
+  border: 2px solid rgb(206, 41, 0);
+}
+.priority-medium {
+  border: 2px solid rgb(201, 132, 5);
+}
+.priority-low {
+  border: 2px solid green;
+}
+
 @media (min-width: 576px) {
   .custom-layout {
     border-radius: 0.375rem;

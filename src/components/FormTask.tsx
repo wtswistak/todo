@@ -27,39 +27,39 @@ const Form: React.FC = () => {
       <FormBs.Control
         type="text"
         placeholder="Learn javascript"
-        className="rounded-1 border-0 text-light custom-input mb-4 "
+        className="rounded-1 border-0 text-light input-task mb-4 "
         style={{ backgroundColor: "var(--clr-primary-light)" }}
         onChange={(e) => setInputValue(e.target.value)}
         required
         minLength={4}
       />
       <h5 className="">Select the priority level of the task </h5>
-      <div className="d-flex align-items-center mb-1 ">
+      <div className="d-flex align-items-center mb-1 ms-1 ">
         <FormBs.Check
           type="radio"
           name="priority"
           id="high"
-          className="radio-custom"
+          className="radio-priority"
           required
         />
         <FormBs.Label htmlFor="high">High</FormBs.Label>
       </div>
-      <div className="d-flex align-items-center mb-1">
+      <div className="d-flex align-items-center mb-1 ms-1">
         <FormBs.Check
           type="radio"
           name="priority"
           id="medium"
-          className="radio-custom"
+          className="radio-priority"
           required
         />
         <FormBs.Label htmlFor="medium">Medium</FormBs.Label>
       </div>
-      <div className="d-flex align-items-center mb-1">
+      <div className="d-flex align-items-center mb-1 ms-1">
         <FormBs.Check
           type="radio"
           name="priority"
           id="low"
-          className="radio-custom"
+          className="radio-priority"
           required
         />
         <FormBs.Label htmlFor="low">Low</FormBs.Label>
@@ -67,7 +67,7 @@ const Form: React.FC = () => {
 
       <Button
         type="submit"
-        className="fw-semibold btn-custom rounded-4 px-4 py-2 mt-4"
+        className="fw-semibold form-btn rounded-4 px-4 py-2 mt-4"
         onClick={handleAddTask}
       >
         Add task

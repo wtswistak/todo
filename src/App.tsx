@@ -1,7 +1,7 @@
 import AppLayout from "./Layouts/AppLayout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AddTask from "./pages/AddTask";
-import ListTask from "./pages/ListTask";
+import TodoList from "./pages/TodoList";
 
 const App = () => {
   return (
@@ -10,7 +10,7 @@ const App = () => {
         <Route element={<AppLayout />}>
           <Route index element={<AddTask />} />
           <Route path="add-task" element={<AddTask />} />
-          <Route path="list-task" element={<ListTask />} />
+          <Route path="todo-list" element={<TodoList />} />
         </Route>
       </Routes>
     </BrowserRouter>

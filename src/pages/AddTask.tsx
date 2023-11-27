@@ -1,7 +1,7 @@
-import Form from "../components/Form";
+import FormTask from "../components/FormTask";
 
 const AddTask = () => {
-  return <Form />;
+  return <FormTask />;
 };
 
 export default AddTask;

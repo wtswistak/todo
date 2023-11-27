@@ -1,5 +1,5 @@
 :root {
-  --clr-primary: #232d3f;
+  --clr-primary: #222c3f;
   --clr-primary-light: #3d4857;
   --clr-primary-dark: #1e2633;
   --clr-secondary: #426caa;
@@ -7,19 +7,15 @@
   --clr-text-light: #c2cdda;
 }
 
-html {
-  height: 100%;
-}
 body {
-  padding-top: 3rem;
-  background-image: linear-gradient(
-    110.3deg,
+  background: linear-gradient(
+    to right,
     rgba(73, 93, 109, 1) 4.3%,
     rgba(49, 55, 82, 1) 96.7%
   );
   color: var(--clr-text-light);
-  height: 100%;
 }
+
 p {
   margin: 0;
 }
@@ -28,15 +24,15 @@ a {
 }
 h5 {
   color: var(--clr-text);
-  margin-bottom: 10px;
+  margin: 0px 2px 14px;
 }
-.custom-input::placeholder {
+.input-task::placeholder {
   color: rgba(196, 207, 223, 0.37);
 }
-.custom-input {
+.input-task {
   outline: var(--clr-primary-light) solid 1px;
 }
-.custom-input:focus {
+.input-task:focus {
   box-shadow: none;
   transition: all ease-in-out 0.2s;
   outline: #7d8692 solid 1px;
@@ -51,58 +47,82 @@ h5 {
   background-color: var(--clr-primary);
   color: #e6e6e6;
 }
-.radio-custom {
+.radio-priority {
   margin-right: 0.4rem;
   font-size: 12px;
 }
+
 label {
   margin-bottom: 0px !important;
 }
-.btn-custom {
+.form-btn {
   background-color: var(--clr-secondary);
   font-size: 14px;
   border: none;
 }
-.btn-custom:hover {
+.form-btn:hover {
   background-color: #3b6199;
 }
+.outlet {
+  height: 50%;
+  flex-grow: 1;
+}
 
-.custom-item {
-  background-color: #1e2633;
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  background-color: var(--clr-primary);
+  max-width: 720px;
+  height: calc(100vh - 64px);
+}
+
+.list-box::-webkit-scrollbar {
+  width: 6px;
+}
+.list-box::-webkit-scrollbar-thumb {
+  background: var(--clr-primary-light);
+}
+.task-box {
+  background-color: #2d3749;
 }
 .priority {
-  color: green;
-  height: 16px;
-  width: 16px;
+  height: 10px;
+  width: 10px;
+  flex-shrink: 0;
   border-radius: 160px;
-  border: 2px solid green;
 }
 .priority-high {
-  border: 2px solid rgb(206, 41, 0);
+  background-color: rgb(206, 41, 0);
 }
 .priority-medium {
-  border: 2px solid rgb(201, 132, 5);
+  background-color: rgb(201, 132, 5);
 }
 .priority-low {
-  border: 2px solid green;
+  background-color: green;
+}
+
+.task-icon:hover {
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+  color: var(--clr-secondary);
 }
 
 @media (min-width: 576px) {
-  .custom-layout {
+  .app-layout {
     border-radius: 0.375rem;
-    height: auto;
-    min-height: 80vh;
   }
 }
 
 @media (max-width: 575px) {
   body {
-    padding-top: 0;
+    padding: 0;
   }
   .header {
     border-radius: 0 !important;
   }
-  .custom-layout {
-    height: 100vh;
+  .app-layout {
+    height: 100%;
+    margin: 0;
   }
 }

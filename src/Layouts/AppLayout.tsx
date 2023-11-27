@@ -3,15 +3,9 @@ import "../index.css";
 import Header from "../components/Header";
 const AppLayout = () => {
   return (
-    <div
-      className="custom-layout shadow-lg mx-auto  mt-0 "
-      style={{
-        backgroundColor: "var(--clr-primary)",
-        maxWidth: "720px",
-      }}
-    >
+    <div className="app-layout shadow-lg mx-auto   ">
       <Header />
-      <div className="p-sm-5 pt-sm-0 p-2 pt-0 ">
+      <div className="p-sm-5 pt-sm-0 p-2 px-3 pt-0 d-flex outlet">
         <Outlet />
       </div>
     </div>

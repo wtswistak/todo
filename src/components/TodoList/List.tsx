@@ -8,9 +8,10 @@ interface Task {
 }
 interface ListProps {
   type: string;
+  isVisible: boolean;
 }
 
-const List: React.FC<ListProps> = ({ type }) => {
+const List: React.FC<ListProps> = ({ type, isVisible }) => {
   const [tasks, setTasks] = useState<Task[]>([
     {
       id: 1,
@@ -57,9 +58,13 @@ const List: React.FC<ListProps> = ({ type }) => {
   ]);
 
   return (
-    <ul className="d-flex flex-column gap-2 px-0 mb-4">
+    <ul
+      className={`${
+        isVisible ? "d-flex" : "d-none"
+      } flex-column gap-2 px-0 mb-4 overflow-hidden `}
+    >
       {tasks
-        .filter((task) => !task.completed)
+        .filter((task) => (type === "todo" ? !task.completed : task.completed))
         .map((task) => {
           return <ListItem task={task} key={task.id} />;
         })}

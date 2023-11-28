@@ -1,4 +1,4 @@
-import FormTask from "../components/FormTask";
+import FormTask from "../components/AddTask/FormTask";
 
 const AddTask = () => {
   return <FormTask />;

@@ -8,7 +8,7 @@ const TodoList = () => {
     useState<boolean>(true);
 
   return (
-    <div className="overflow-y-auto container-fluid p-0 pe-sm-2  list-box">
+    <div className="container-fluid p-0 pe-sm-2  list-box">
       <ListHeader
         children={"Tasks to do"}
         isVisible={isTodoListVisible}

@@ -11,13 +11,13 @@ const ListHeader = ({ children, isVisible, setIsVisible }: ListHeaderProps) => {
       <h5 className="my-0">{children} </h5>
       {isVisible ? (
         <IoIosArrowDropup
-          size={24}
+          size={22}
           className="task-icon me-3"
           onClick={() => setIsVisible(!isVisible)}
         />
       ) : (
         <IoIosArrowDropdown
-          size={24}
+          size={22}
           className="task-icon me-3"
           onClick={() => setIsVisible(!isVisible)}
         />

@@ -24,7 +24,7 @@ a {
 }
 h5 {
   color: var(--clr-text);
-  margin: 0px 2px 14px;
+  margin: 0px 6px 14px;
 }
 .input-task::placeholder {
   color: rgba(196, 207, 223, 0.37);
@@ -112,6 +112,9 @@ label {
   .app-layout {
     border-radius: 0.375rem;
   }
+  .list-box {
+    overflow-y: auto;
+  }
 }
 
 @media (max-width: 575px) {
@@ -121,8 +124,10 @@ label {
   .header {
     border-radius: 0 !important;
   }
+
   .app-layout {
     height: 100%;
+    min-height: 100vh;
     margin: 0;
   }
 }

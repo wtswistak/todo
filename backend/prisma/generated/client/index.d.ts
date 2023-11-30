@@ -993,20 +993,23 @@ export namespace Prisma {
 
   export type UserMinAggregateOutputType = {
     id: number | null
-    name: string | null
+    username: string | null
     email: string | null
+    password: string | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: number | null
-    name: string | null
+    username: string | null
     email: string | null
+    password: string | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
-    name: number
+    username: number
     email: number
+    password: number
     _all: number
   }
 
@@ -1021,20 +1024,23 @@ export namespace Prisma {
 
   export type UserMinAggregateInputType = {
     id?: true
-    name?: true
+    username?: true
     email?: true
+    password?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
-    name?: true
+    username?: true
     email?: true
+    password?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
-    name?: true
+    username?: true
     email?: true
+    password?: true
     _all?: true
   }
 
@@ -1126,8 +1132,9 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: number
-    name: string
+    username: string
     email: string
+    password: string
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1151,16 +1158,18 @@ export namespace Prisma {
 
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    username?: boolean
     email?: boolean
+    password?: boolean
     tasks?: boolean | User$tasksArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
-    name?: boolean
+    username?: boolean
     email?: boolean
+    password?: boolean
   }
 
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1176,8 +1185,9 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      name: string
+      username: string
       email: string
+      password: string
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1574,8 +1584,9 @@ export namespace Prisma {
    */ 
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'Int'>
-    readonly name: FieldRef<"User", 'String'>
+    readonly username: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
+    readonly password: FieldRef<"User", 'String'>
   }
     
 
@@ -2885,8 +2896,9 @@ export namespace Prisma {
 
   export const UserScalarFieldEnum: {
     id: 'id',
-    name: 'name',
-    email: 'email'
+    username: 'username',
+    email: 'email',
+    password: 'password'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -2944,15 +2956,17 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     id?: IntFilter<"User"> | number
-    name?: StringFilter<"User"> | string
+    username?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
     tasks?: TaskListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
+    username?: SortOrder
     email?: SortOrder
+    password?: SortOrder
     tasks?: TaskOrderByRelationAggregateInput
   }
 
@@ -2962,14 +2976,16 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    name?: StringFilter<"User"> | string
+    username?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
     tasks?: TaskListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
+    username?: SortOrder
     email?: SortOrder
+    password?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -2982,8 +2998,9 @@ export namespace Prisma {
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"User"> | number
-    name?: StringWithAggregatesFilter<"User"> | string
+    username?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
+    password?: StringWithAggregatesFilter<"User"> | string
   }
 
   export type TaskWhereInput = {
@@ -3039,46 +3056,53 @@ export namespace Prisma {
   }
 
   export type UserCreateInput = {
-    name: string
+    username: string
     email: string
+    password: string
     tasks?: TaskCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: number
-    name: string
+    username: string
     email: string
+    password: string
     tasks?: TaskUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     tasks?: TaskUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     tasks?: TaskUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: number
-    name: string
+    username: string
     email: string
+    password: string
   }
 
   export type UserUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
   }
 
   export type TaskCreateInput = {
@@ -3163,8 +3187,9 @@ export namespace Prisma {
 
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    username?: SortOrder
     email?: SortOrder
+    password?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -3173,14 +3198,16 @@ export namespace Prisma {
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    username?: SortOrder
     email?: SortOrder
+    password?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    username?: SortOrder
     email?: SortOrder
+    password?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -3441,14 +3468,16 @@ export namespace Prisma {
   }
 
   export type UserCreateWithoutTasksInput = {
-    name: string
+    username: string
     email: string
+    password: string
   }
 
   export type UserUncheckedCreateWithoutTasksInput = {
     id?: number
-    name: string
+    username: string
     email: string
+    password: string
   }
 
   export type UserCreateOrConnectWithoutTasksInput = {
@@ -3468,14 +3497,16 @@ export namespace Prisma {
   }
 
   export type UserUpdateWithoutTasksInput = {
-    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateWithoutTasksInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
   }
 
   export type TaskCreateManyUserInput = {

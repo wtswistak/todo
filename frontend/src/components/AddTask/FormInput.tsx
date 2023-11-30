@@ -7,8 +7,7 @@ const FormInput: React.FC<FormInputProps> = ({ setInputValue }) => {
     <FormBs.Control
       type="text"
       placeholder="Task to do"
-      className="rounded-1 border-0 text-light input-task mb-4 "
-      style={{ backgroundColor: "var(--clr-primary-light)" }}
+      className="rounded-1 input-task mb-4 "
       onChange={(e) => setInputValue(e.target.value)}
       required
       minLength={4}

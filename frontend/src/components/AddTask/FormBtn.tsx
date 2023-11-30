@@ -8,7 +8,7 @@ const FormBtn: React.FC<FormBtnProps> = ({ handleAddTask }) => {
   return (
     <Button
       type="submit"
-      className="fw-semibold form-btn rounded-4 px-4 py-2 mt-4"
+      className="form-btn rounded-4 px-4 py-2 mt-4"
       onClick={handleAddTask}
     >
       Add task

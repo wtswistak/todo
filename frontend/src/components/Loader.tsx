@@ -1,4 +1,4 @@
-const LoadingElement = () => {
+const Loader = () => {
   return (
     <div className="lds-ring">
       <div></div>
@@ -9,4 +9,4 @@ const LoadingElement = () => {
   );
 };
 
-export default LoadingElement;
+export default Loader;

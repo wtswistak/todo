@@ -7,6 +7,7 @@ import SignUp from "./pages/SignUp";
 import { Provider } from "react-redux";
 import store from "./state/store";
 import PageNotFound from "./pages/PageNotFound";
+import AuthRoute from "./routes/AuthRoute";
 
 const App = () => {
   return (
@@ -14,11 +15,19 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route element={<AppLayout />}>
-            <Route index element={<AddTask />} />
-            <Route path="todo/add" element={<AddTask />} />
-            <Route path="todo/list" element={<TodoList />} />
+            <Route index element={<Login />} />
             <Route path="user/login" element={<Login />} />
             <Route path="user/sign-up" element={<SignUp />} />
+            <Route
+              path="*"
+              element={
+                <AuthRoute>
+                  <Route index element={<AddTask />} />
+                  <Route path="todo/add" element={<AddTask />} />
+                  <Route path="todo/list" element={<TodoList />} />
+                </AuthRoute>
+              }
+            />
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>

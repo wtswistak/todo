@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthBtn from "../Auth/AuthBtn";
 import AuthInput from "../Auth/AuthInput";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../state/userSlice";
 interface AuthFormProps {
   type: string;
 }
@@ -12,6 +14,9 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
   const [username, setUsername] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleAuth = async (type: string) => {
     setIsLoading(true);
@@ -36,11 +41,14 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
       });
       const data = await res.json();
       setErrorMessage(data.message);
+      if (type === "login" && res.ok) dispatch(setUser(username));
 
       console.log(data);
     } catch (err) {
       console.log(err);
     } finally {
+      if (type === "login") navigate("/todo/add");
+      // if (type === "signup") navigate("/user/login");
       setPassword("");
       setEmail("");
       setUsername("");
@@ -48,7 +56,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
     }
   };
   return (
-    <div className="container p-0 mx-auto" style={{ maxWidth: "340px" }}>
+    <div
+      className="container p-0 mx-auto my-sm-5"
+      style={{ maxWidth: "340px" }}
+    >
       <h5 className="text-center  ">
         {type.charAt(0).toUpperCase() + type.slice(1)}
       </h5>

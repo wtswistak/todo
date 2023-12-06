@@ -41,7 +41,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
       });
       const data = await res.json();
       setErrorMessage(data.message);
-      if (type === "login" && res.ok) dispatch(setUser(username));
+      if (type === "login" && res.ok) {
+        dispatch(setUser(username));
+        localStorage.setItem("token", data.token);
+      }
 
       console.log(data);
     } catch (err) {

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Routes } from "react-router-dom";
 import { selectUser } from "../state/userSlice";
 
 interface AuthRouteProps {

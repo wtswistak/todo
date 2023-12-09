@@ -6,10 +6,10 @@ interface AuthRouteProps {
   children?: React.ReactNode;
 }
 const AuthRoute: React.FC<AuthRouteProps> = ({ children }) => {
-  const user = useSelector(selectUser);
+  const { username } = useSelector(selectUser);
 
-  if (!user) {
-    return <Navigate to="/user/login" />;
+  if (!username) {
+    return <Navigate to="/auth/login" />;
   }
 
   return <Routes>{children}</Routes>;

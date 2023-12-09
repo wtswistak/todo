@@ -2,37 +2,65 @@ import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import { addUser, loginUser, UserError } from "./services/userService";
 import { generateToken, verifyToken } from "./utils/authToken";
-import { addTodo } from "./services/todoService";
+import { addTodo, getTodos } from "./services/todoService";
 require("dotenv").config();
 
 const cors = require("cors");
 const app = express();
 const port = 3000;
+const apiRouter = express.Router();
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use("/api/v1", apiRouter);
 
-app.get("/", (req: Request, res: Response) => {
+apiRouter.get("/", (req: Request, res: Response) => {
   console.log("work");
   res.send("work");
 });
 
-app.post("/todo/add", async (req: Request, res: Response) => {
-  const { userId, title, priority, completed, token } = req.body;
+apiRouter.get(
+  "/user/:userId/todos/:completed",
+  async (req: Request, res: Response) => {
+    let { userId, completed } = req.params;
+    const token = req.header("Authorization")?.split(" ")[1];
+    const userIdInt = parseInt(userId);
+    const completedBool = completed === "true";
+    try {
+      if (!token) {
+        return res.status(400).json({ message: "Token is required" });
+      }
+      const tokenVerify = await verifyToken(token);
+      if (!tokenVerify) {
+        return res.status(400).json({ message: "Invalid token" });
+      }
+
+      const todos = await getTodos(userIdInt, completedBool);
+      res.status(200).json({ todos });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
+);
+apiRouter.post("/user/:userId/todos", async (req: Request, res: Response) => {
+  let userIdNum = parseInt(req.params.userId);
+  const { title, priority, completed, token } = req.body;
   console.log(req.body);
   try {
     const tokenVerify = await verifyToken(token);
     if (!tokenVerify) {
       return res.status(400).json({ message: "Token is required" });
     }
-    await addTodo(userId, title, priority, completed);
+    await addTodo(userIdNum, title, priority, completed);
     res.status(201).json({ message: "Task added to the list" });
   } catch (error) {
     console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
-app.post("/user/sign-up", async (req: Request, res: Response) => {
+apiRouter.post("/auth/sign-up", async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
 
   try {
@@ -46,7 +74,7 @@ app.post("/user/sign-up", async (req: Request, res: Response) => {
     }
   }
 });
-app.post("/user/login", async (req: Request, res: Response) => {
+apiRouter.post("/auth/login", async (req: Request, res: Response) => {
   const { username, password } = req.body;
   console.log(username);
   try {

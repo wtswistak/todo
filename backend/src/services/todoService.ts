@@ -24,3 +24,21 @@ export async function addTodo(
     await prisma.$disconnect();
   }
 }
+
+export async function getTodos(userId: number, completed: boolean) {
+  try {
+    const todos = await prisma.task.findMany({
+      where: {
+        userId: userId,
+        completed: completed,
+      },
+    });
+    // console.log(todos);
+    return todos;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  } finally {
+    await prisma.$disconnect();
+  }
+}

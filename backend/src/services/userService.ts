@@ -27,8 +27,11 @@ export async function addUser(
         email: email,
       },
     });
-    if (usernameExist || emailExist) {
-      throw new UserError("Email or username already exists");
+    if (emailExist) {
+      throw new UserError("Email already exists");
+    }
+    if (usernameExist) {
+      throw new UserError("Username already exists");
     }
     const passwordCrypt = await bcrypt.hash(password, 10);
     await prisma.user.create({
@@ -51,7 +54,7 @@ export async function addUser(
 export async function loginUser(
   username: string,
   password: string
-): Promise<void> {
+): Promise<User> {
   try {
     const user = await prisma.user.findUnique({
       where: {
@@ -66,6 +69,8 @@ export async function loginUser(
       throw new UserError("Password is incorrect");
     }
     console.log("Login success");
+    console.log(user.id);
+    return user;
   } catch (error) {
     console.error("Problem during login", error);
     throw error;

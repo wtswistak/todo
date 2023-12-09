@@ -16,15 +16,15 @@ const App = () => {
         <Routes>
           <Route element={<AppLayout />}>
             <Route index element={<Login />} />
-            <Route path="user/login" element={<Login />} />
-            <Route path="user/sign-up" element={<SignUp />} />
+            <Route path="auth/login" element={<Login />} />
+            <Route path="auth/sign-up" element={<SignUp />} />
             <Route
               path="*"
               element={
                 <AuthRoute>
                   <Route index element={<AddTask />} />
-                  <Route path="todo/add" element={<AddTask />} />
-                  <Route path="todo/list" element={<TodoList />} />
+                  <Route path="todos/add" element={<AddTask />} />
+                  <Route path="todos" element={<TodoList />} />
                 </AuthRoute>
               }
             />

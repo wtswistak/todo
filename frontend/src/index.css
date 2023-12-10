@@ -19,6 +19,7 @@ body {
 
 p {
   margin: 0;
+  letter-spacing: 0.6px;
 }
 a {
   text-decoration: none;
@@ -65,8 +66,12 @@ label {
   background-color: var(--clr-secondary);
   color: #e6e6e6;
   font-size: 16px;
+  min-width: 120px;
   font-weight: 600;
   border: none;
+}
+.form-btn:active {
+  background-color: #3b6199 !important;
 }
 .form-btn:hover,
 .form-btn:focus,
@@ -74,7 +79,7 @@ label {
   background-color: #3b6199;
 }
 .outlet {
-  height: 50%;
+  max-height: 100%;
   flex-grow: 1;
 }
 
@@ -178,7 +183,7 @@ label {
   }
 }
 
-@media (max-width: 575px) {
+@media (max-width: 575px), (max-height: 500px) {
   body {
     padding: 0;
   }
@@ -190,5 +195,13 @@ label {
     height: 100%;
     min-height: 100vh;
     margin: 0;
+  }
+}
+@media (max-height: 500px) {
+  .app-layout {
+    border-radius: 0;
+  }
+  .auth-form {
+    margin: auto !important;
   }
 }

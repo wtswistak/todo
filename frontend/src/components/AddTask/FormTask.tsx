@@ -1,22 +1,40 @@
 import { useState } from "react";
 import { Form as FormBs } from "react-bootstrap";
 import FormBtn from "./FormBtn";
-import RadioContainer from "./RadioContainer";
+import RadioRow from "./RadioRow";
 import FormInput from "./FormInput";
-
-interface Task {
-  task: string;
-  complete: boolean;
-}
+import useFetch from "../../hooks/useFetch";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../state/userSlice";
+import config from "../../config";
+import Message from "../Message";
 
 const Form: React.FC = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
+  const [priority, setPriority] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+  const { handleFetch, isLoading } = useFetch();
+  const { id } = useSelector(selectUser);
 
-  const handleAddTask = () => {
-    const task: Task = { task: inputValue, complete: false };
-    setTasks([...tasks, task]);
-    console.log(tasks);
+  const handleAddTask = async () => {
+    const token = localStorage.getItem("token");
+    const endpoint = config.SERVER_URL + `user/${id}/todos`;
+
+    let body = {
+      userId: id,
+      title: inputValue,
+      priority: priority,
+      token: token,
+      completed: false,
+    };
+    const { data, response, error } = await handleFetch(
+      endpoint,
+      "POST",
+      {},
+      body
+    );
+    setMessage(data.message);
+    console.log(response);
   };
   return (
     <FormBs
@@ -28,11 +46,16 @@ const Form: React.FC = () => {
       <h5>Enter the task </h5>
       <FormInput setInputValue={setInputValue} />
       <h5>Select the priority level of the task </h5>
-      <RadioContainer priority="high" />
-      <RadioContainer priority="medium" />
-      <RadioContainer priority="low" />
+      <RadioRow variety="high" setPriority={setPriority} priority={priority} />
+      <RadioRow
+        variety="medium"
+        setPriority={setPriority}
+        priority={priority}
+      />
+      <RadioRow variety="low" setPriority={setPriority} priority={priority} />
 
-      <FormBtn handleAddTask={handleAddTask} />
+      <FormBtn handleAddTask={handleAddTask} isLoading={isLoading} />
+      <Message message={message} isLoading={isLoading} />
     </FormBs>
   );
 };

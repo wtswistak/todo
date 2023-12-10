@@ -25,12 +25,11 @@ export async function addTodo(
   }
 }
 
-export async function getTodos(userId: number, completed: boolean) {
+export async function getTodos(userId: number) {
   try {
     const todos = await prisma.task.findMany({
       where: {
         userId: userId,
-        completed: completed,
       },
     });
     // console.log(todos);

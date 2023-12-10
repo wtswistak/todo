@@ -19,30 +19,27 @@ apiRouter.get("/", (req: Request, res: Response) => {
   res.send("work");
 });
 
-apiRouter.get(
-  "/user/:userId/todos/:completed",
-  async (req: Request, res: Response) => {
-    let { userId, completed } = req.params;
-    const token = req.header("Authorization")?.split(" ")[1];
-    const userIdInt = parseInt(userId);
-    const completedBool = completed === "true";
-    try {
-      if (!token) {
-        return res.status(400).json({ message: "Token is required" });
-      }
-      const tokenVerify = await verifyToken(token);
-      if (!tokenVerify) {
-        return res.status(400).json({ message: "Invalid token" });
-      }
+apiRouter.get("/user/:userId/todos/", async (req: Request, res: Response) => {
+  let { userId } = req.params;
+  const token = req.header("Authorization")?.split(" ")[1];
+  const userIdInt = parseInt(userId);
 
-      const todos = await getTodos(userIdInt, completedBool);
-      res.status(200).json({ todos });
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ message: "Internal Server Error" });
+  try {
+    if (!token) {
+      return res.status(400).json({ message: "Token is required" });
     }
+    const tokenVerify = await verifyToken(token);
+    if (!tokenVerify) {
+      return res.status(400).json({ message: "Invalid token" });
+    }
+
+    const todos = await getTodos(userIdInt);
+    res.status(200).json({ todos });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
-);
+});
 apiRouter.post("/user/:userId/todos", async (req: Request, res: Response) => {
   let userIdNum = parseInt(req.params.userId);
   const { title, priority, completed, token } = req.body;

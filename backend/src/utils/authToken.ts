@@ -1,14 +1,13 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 
-export const generateToken = (userId: string) => {
+export const generateToken = (username: string) => {
   const privateKey = process.env.PRIVATE_KEY || "secretKey";
-  const token = jwt.sign({ userId }, privateKey, { expiresIn: "1h" });
+  const token = jwt.sign({ username }, privateKey, { expiresIn: "1h" });
   return token;
 };
 
 export const verifyToken = (token: string): Promise<JwtPayload> => {
   return new Promise((resolve, reject) => {
-    console.log("w authToken:", token);
     const privateKey = process.env.PRIVATE_KEY || "secretKey";
 
     jwt.verify(token, privateKey, (err, decoded) => {

@@ -1,23 +1,28 @@
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { selectUser } from "../state/userSlice";
 
 const Header = () => {
+  const { username } = useSelector(selectUser);
   return (
-    <div
-      className="d-flex px-sm-5 mb-5 rounded-top px-0 justify-content-between header"
-      style={{ backgroundColor: "var(--clr-primary-dark)" }}
-    >
-      <div className="d-flex">
-        <NavLink to="/add-task" className="nav-link ">
-          Add Task
-        </NavLink>
-        <NavLink to="/todo-list" className="nav-link">
-          Todo list
+    username && (
+      <div
+        className="d-flex px-sm-5 rounded-top px-0 justify-content-between header"
+        style={{ backgroundColor: "var(--clr-primary-dark)" }}
+      >
+        <div className="d-flex">
+          <NavLink to="/todos/add" className="nav-link ">
+            Add Task
+          </NavLink>
+          <NavLink to="/todos" className="nav-link">
+            Todo list
+          </NavLink>
+        </div>
+        <NavLink to={"/"} className="nav-link">
+          Logout
         </NavLink>
       </div>
-      <NavLink to="/login" className="nav-link">
-        Login
-      </NavLink>
-    </div>
+    )
   );
 };
 

@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface UserState {
   id: number | null;
   username: string | null;
+  isLoading: boolean;
 }
 
 const initialState: UserState = {
   id: null,
   username: null,
+  isLoading: false,
 };
 
 const userSlice = createSlice({
@@ -25,10 +27,17 @@ const userSlice = createSlice({
       state.id = null;
       state.username = null;
     },
+    startLoading: (state) => {
+      state.isLoading = true;
+    },
+    stopLoading: (state) => {
+      state.isLoading = false;
+    },
   },
 });
 
 export default userSlice.reducer;
-export const { setUser, clearUser } = userSlice.actions;
+export const { setUser, clearUser, startLoading, stopLoading } =
+  userSlice.actions;
 
 export const selectUser = (state: { user: UserState }) => state.user;

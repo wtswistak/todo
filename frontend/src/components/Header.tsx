@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom";
 import { selectUser } from "../state/userSlice";
 
 const Header = () => {
-  const { username } = useSelector(selectUser);
+  const { username, isLoading } = useSelector(selectUser);
+
   return (
     username && (
       <div
@@ -11,14 +12,20 @@ const Header = () => {
         style={{ backgroundColor: "var(--clr-primary-dark)" }}
       >
         <div className="d-flex">
-          <NavLink to="/todos/add" className="nav-link ">
+          <NavLink
+            to="/todos/add"
+            className={`nav-link ${isLoading ? "disabled" : ""}`}
+          >
             Add Task
           </NavLink>
-          <NavLink to="/todos" className="nav-link">
+          <NavLink
+            to="/todos"
+            className={`nav-link ${isLoading ? "disabled" : ""}`}
+          >
             Todo list
           </NavLink>
         </div>
-        <NavLink to={"/"} className="nav-link">
+        <NavLink to={"/"} className={`nav-link ${isLoading ? "disabled" : ""}`}>
           Logout
         </NavLink>
       </div>

@@ -32,8 +32,42 @@ export async function getTodos(userId: number) {
         userId: userId,
       },
     });
-    // console.log(todos);
     return todos;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+export async function deleteTodo(userId: number, todoId: number) {
+  try {
+    await prisma.task.delete({
+      where: {
+        id: todoId,
+        userId: userId,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    throw error;
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+export async function updateTodo(userId: number, todoId: number) {
+  try {
+    await prisma.task.update({
+      where: {
+        id: todoId,
+        userId: userId,
+      },
+      data: {
+        completed: true,
+      },
+    });
   } catch (error) {
     console.error(error);
     throw error;

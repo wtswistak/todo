@@ -2,7 +2,12 @@ import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import { addUser, loginUser, UserError } from "./services/userService";
 import { generateToken, verifyToken } from "./utils/authToken";
-import { addTodo, getTodos } from "./services/todoService";
+import {
+  addTodo,
+  deleteTodo,
+  getTodos,
+  updateTodo,
+} from "./services/todoService";
 require("dotenv").config();
 
 const cors = require("cors");
@@ -11,9 +16,14 @@ const port = 3000;
 const apiRouter = express.Router();
 
 app.use(bodyParser.json());
-app.use(cors());
-app.use("/api/v1", apiRouter);
 
+app.use("/api/v1", apiRouter);
+apiRouter.use(
+  cors({
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 apiRouter.get("/", (req: Request, res: Response) => {
   console.log("work");
   res.send("work");
@@ -40,14 +50,42 @@ apiRouter.get("/user/:userId/todos/", async (req: Request, res: Response) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+apiRouter.patch(
+  "/user/:userId/todos/:todoId",
+  async (req: Request, res: Response) => {
+    const userIdNum = parseInt(req.params.userId);
+    const todoIdNum = parseInt(req.params.todoId);
+    const token = req.header("Authorization")?.split(" ")[1];
+    try {
+      if (!token) {
+        return res.status(400).json({ message: "Token is required" });
+      }
+      const tokenVerify = await verifyToken(token);
+      if (!tokenVerify) {
+        return res.status(400).json({ message: "Invalid token" });
+      }
+      await updateTodo(userIdNum, todoIdNum);
+      res.status(201).json({ message: "Task changed" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
+);
+
 apiRouter.post("/user/:userId/todos", async (req: Request, res: Response) => {
-  let userIdNum = parseInt(req.params.userId);
-  const { title, priority, completed, token } = req.body;
+  const userIdNum = parseInt(req.params.userId);
+  const token = req.header("Authorization")?.split(" ")[1];
+  const { title, priority, completed } = req.body;
   console.log(req.body);
   try {
+    if (!token) {
+      return res.status(400).json({ message: "Token is required" });
+    }
     const tokenVerify = await verifyToken(token);
     if (!tokenVerify) {
-      return res.status(400).json({ message: "Token is required" });
+      return res.status(400).json({ message: "Invalid token" });
     }
     await addTodo(userIdNum, title, priority, completed);
     res.status(201).json({ message: "Task added to the list" });
@@ -56,6 +94,28 @@ apiRouter.post("/user/:userId/todos", async (req: Request, res: Response) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+apiRouter.delete(
+  "/user/:userId/todos/:todoId",
+  async (req: Request, res: Response) => {
+    const userIdNum = parseInt(req.params.userId);
+    const todoIdNum = parseInt(req.params.todoId);
+    const token = req.header("Authorization")?.split(" ")[1];
+    try {
+      if (!token) {
+        return res.status(400).json({ message: "Token is required" });
+      }
+      const tokenVerify = await verifyToken(token);
+      if (!tokenVerify) {
+        return res.status(400).json({ message: "Invalid token" });
+      }
+      await deleteTodo(userIdNum, todoIdNum);
+      res.status(200).json({ isRemoved: true });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
+);
 
 apiRouter.post("/auth/sign-up", async (req: Request, res: Response) => {
   const { username, email, password } = req.body;

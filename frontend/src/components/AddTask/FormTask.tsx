@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form as FormBs } from "react-bootstrap";
 import FormBtn from "./FormBtn";
 import RadioRow from "./RadioRow";
 import FormInput from "./FormInput";
 import useFetch from "../../hooks/useFetch";
 import { useSelector } from "react-redux";
-import { selectUser } from "../../state/userSlice";
 import config from "../../config";
 import Message from "../Message";
 
@@ -13,34 +12,38 @@ const Form: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [priority, setPriority] = useState<string>("");
   const [message, setMessage] = useState<string>("");
-  const { handleFetch, isLoading } = useFetch();
-  const { id } = useSelector(selectUser);
+  const { handleFetch } = useFetch();
+  const isLoading = useSelector((state: any) => state.todos.isLoading);
+  const userId = localStorage.getItem("userId");
 
   const handleAddTask = async () => {
     const token = localStorage.getItem("token");
-    const endpoint = config.SERVER_URL + `user/${id}/todos`;
+    const endpoint = config.SERVER_URL + `user/${userId}/todos`;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
 
     let body = {
-      userId: id,
       title: inputValue,
       priority: priority,
-      token: token,
       completed: false,
     };
-    const { data, response, error } = await handleFetch(
+    const { data, response } = await handleFetch(
       endpoint,
       "POST",
-      {},
+      headers,
       body
     );
     setMessage(data.message);
     console.log(response);
   };
+
   return (
     <FormBs
       className=" mt-sm-0 container-fluid p-0"
       onSubmit={(e) => {
         e.preventDefault();
+        handleAddTask();
       }}
     >
       <h5>Enter the task </h5>
@@ -54,7 +57,7 @@ const Form: React.FC = () => {
       />
       <RadioRow variety="low" setPriority={setPriority} priority={priority} />
 
-      <FormBtn handleAddTask={handleAddTask} isLoading={isLoading} />
+      <FormBtn isLoading={isLoading} />
       <Message message={message} isLoading={isLoading} />
     </FormBs>
   );

@@ -1,12 +1,23 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { selectUser } from "../state/userSlice";
+import { NavLink, useLocation } from "react-router-dom";
 
 const Header = () => {
-  const { username, isLoading } = useSelector(selectUser);
+  const isLoading = useSelector((state: any) => state.todos.isLoading);
+  let userId = localStorage.getItem("userId");
+  const location = useLocation();
+
+  const handleLogout = () => {
+    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
+  };
+
+  useEffect(() => {
+    let userId = localStorage.getItem("userId");
+  }, [location.pathname]);
 
   return (
-    username && (
+    userId && (
       <div
         className="d-flex px-sm-5 rounded-top px-0 justify-content-between header"
         style={{ backgroundColor: "var(--clr-primary-dark)" }}
@@ -25,7 +36,11 @@ const Header = () => {
             Todo list
           </NavLink>
         </div>
-        <NavLink to={"/"} className={`nav-link ${isLoading ? "disabled" : ""}`}>
+        <NavLink
+          to={"/auth/login"}
+          className={`nav-link ${isLoading ? "disabled" : ""}`}
+          onClick={() => handleLogout()}
+        >
           Logout
         </NavLink>
       </div>

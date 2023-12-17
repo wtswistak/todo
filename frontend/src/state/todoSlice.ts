@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface TodoState {
   todos: ITodo[];
   completedTodos: ITodo[];
+  isLoading: boolean;
 }
 
 const initialState: TodoState = {
   todos: [],
   completedTodos: [],
+  isLoading: false,
 };
 
 const todoSlice = createSlice({
@@ -37,10 +39,17 @@ const todoSlice = createSlice({
         state.todos = state.todos.filter((todo) => todo.id !== todoId);
       }
     },
+    startLoading: (state) => {
+      state.isLoading = true;
+    },
+    stopLoading: (state) => {
+      state.isLoading = false;
+    },
   },
 });
 
-export const { setTodos, removeTodo, updateTodo } = todoSlice.actions;
+export const { setTodos, removeTodo, updateTodo, startLoading, stopLoading } =
+  todoSlice.actions;
 export const selectTodos = (state: { todos: TodoState }) => state.todos.todos;
 export const selectCompletedTodos = (state: { todos: TodoState }) =>
   state.todos.completedTodos;

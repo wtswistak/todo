@@ -1,3 +1,4 @@
+import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 export const generateToken = (username: string) => {
@@ -6,7 +7,7 @@ export const generateToken = (username: string) => {
   return token;
 };
 
-export const verifyToken = (token: string): Promise<JwtPayload> => {
+const verifyToken = (token: string): Promise<JwtPayload> => {
   return new Promise((resolve, reject) => {
     const privateKey = process.env.PRIVATE_KEY || "secretKey";
 
@@ -19,3 +20,27 @@ export const verifyToken = (token: string): Promise<JwtPayload> => {
     });
   });
 };
+
+export async function authenticateToken(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const token = req.header("Authorization")?.split(" ")[1];
+
+  try {
+    if (!token) {
+      return res.status(400).json({ message: "Token is required" });
+    }
+    const tokenVerify = await verifyToken(token);
+
+    if (!tokenVerify) {
+      return res.status(400).json({ message: "Invalid token" });
+    }
+
+    next();
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+}

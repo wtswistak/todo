@@ -2,8 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthBtn from "../Auth/AuthBtn";
 import AuthInput from "../Auth/AuthInput";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../state/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 import config from "../../config";
 import useFetch from "../../hooks/useFetch";
 import Message from "../Message";
@@ -14,14 +13,14 @@ interface AuthFormProps {
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
-  const [email, setEmail] = useState<string>("");
+  const [email, setEmail] = useState<string>("test@test.pl");
   const [password, setPassword] = useState<string>("test123");
   const [username, setUsername] = useState<string>("test123");
   const [message, setMessage] = useState<string>("");
-  const { handleFetch, isLoading } = useFetch();
+  const { handleFetch } = useFetch();
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLoading = useSelector((state: any) => state.todos.isLoading);
 
   const handleAuth = async (type: string) => {
     let body = {};
@@ -44,16 +43,15 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
     );
     setMessage(data?.message);
     if (!response?.ok) {
-      console.log(error);
       return null;
     }
     if (type === "login") {
-      dispatch(setUser({ id: data.userId, username: username }));
+      localStorage.setItem("userId", data.userId);
       localStorage.setItem("token", data.token);
-      navigate("/todos/add");
+      const userIdd = localStorage.getItem("userId");
+      if (userIdd) navigate("/todos/add");
     }
     if (type === "signup") {
-      // navigate("/user/login");
       setPassword("");
       setEmail("");
       setUsername("");
@@ -89,7 +87,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
             <AuthInput type="email" value={email} setInputValue={setEmail} />
           </>
         )}
-        <label htmlFor="username">Username</label>
+        <label htmlFor="text">Username</label>
         <AuthInput type={"text"} value={username} setInputValue={setUsername} />
         <label htmlFor="password">Password</label>
         <AuthInput

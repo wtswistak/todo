@@ -6,6 +6,7 @@ const FormInput: React.FC<FormInputProps> = ({ setInputValue }) => {
   return (
     <FormBs.Control
       type="text"
+      name="title"
       placeholder="Task to do"
       className="rounded-1 input-task mb-4 "
       onChange={(e) => setInputValue(e.target.value)}

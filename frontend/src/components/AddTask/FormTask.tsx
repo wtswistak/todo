@@ -35,7 +35,6 @@ const Form: React.FC = () => {
       body
     );
     setMessage(data.message);
-    console.log(response);
   };
 
   return (

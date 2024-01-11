@@ -17,7 +17,6 @@ const todoSlice = createSlice({
   initialState,
   reducers: {
     setTodos: (state, action: PayloadAction<{ todos: ITodo[] }>) => {
-      console.log(action.payload);
       state.todos = action.payload.todos.filter((todo) => !todo.completed);
       state.completedTodos = action.payload.todos.filter(
         (todo) => todo.completed

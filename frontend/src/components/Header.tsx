@@ -13,7 +13,8 @@ const Header = () => {
   };
 
   useEffect(() => {
-    let userId = localStorage.getItem("userId");
+    const userIdTemp = localStorage.getItem("userId");
+    userId = userIdTemp;
   }, [location.pathname]);
 
   return (

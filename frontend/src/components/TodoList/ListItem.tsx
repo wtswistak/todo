@@ -2,7 +2,7 @@ import React from "react";
 import { IoMdTrash, IoMdCheckboxOutline } from "react-icons/io";
 import useFetch from "../../hooks/useFetch";
 import config from "../../config";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { removeTodo, updateTodo } from "../../state/todoSlice";
 import { getHeaders } from "../../helpers/helper";
 

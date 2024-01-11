@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthBtn from "../Auth/AuthBtn";
 import AuthInput from "../Auth/AuthInput";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import config from "../../config";
 import useFetch from "../../hooks/useFetch";
 import Message from "../Message";
@@ -35,12 +35,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
       body = { email, password, username };
     }
 
-    const { data, response, error } = await handleFetch(
-      endpoint,
-      "POST",
-      {},
-      body
-    );
+    const { data, response } = await handleFetch(endpoint, "POST", {}, body);
     setMessage(data?.message);
     if (!response?.ok) {
       return null;

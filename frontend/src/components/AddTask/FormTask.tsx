@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Form as FormBs } from "react-bootstrap";
 import FormBtn from "./FormBtn";
 import RadioRow from "./RadioRow";
@@ -28,12 +28,7 @@ const Form: React.FC = () => {
       priority: priority,
       completed: false,
     };
-    const { data, response } = await handleFetch(
-      endpoint,
-      "POST",
-      headers,
-      body
-    );
+    const { data } = await handleFetch(endpoint, "POST", headers, body);
     setMessage(data.message);
   };
 

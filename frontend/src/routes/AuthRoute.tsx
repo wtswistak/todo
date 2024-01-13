@@ -9,7 +9,6 @@ const AuthRoute: React.FC<AuthRouteProps> = ({ children }) => {
   if (!user) {
     return <Navigate to="/auth/login" />;
   }
-  if (user) return <Navigate to="/todos/add" />;
 
   return <Routes>{children}</Routes>;
 };

@@ -30,7 +30,7 @@ const TodoList = () => {
     const endpoint = config.SERVER_URL + `user/${userId}/todos/`;
 
     const { data } = await handleFetch(endpoint, "GET", headers);
-    dispatch(setTodos({ todos: data.todos.reverse() }));
+    dispatch(setTodos({ todos: data.todos?.reverse() }));
   };
   useEffect(() => {
     if (!isMounted.current) {

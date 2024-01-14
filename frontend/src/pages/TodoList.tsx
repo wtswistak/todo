@@ -43,7 +43,7 @@ const TodoList = () => {
     <div className="container-fluid p-0 pe-sm-2 list-box">
       {isLoading ? (
         <Loader />
-      ) : !todos.length || !completedTodos.length ? (
+      ) : !todos.length && !completedTodos.length ? (
         <p>You don't have any task</p>
       ) : (
         <>

@@ -1,6 +1,5 @@
 # Todo App
-Aplikacja do zarządzania zadaniami stworzona w ramach projektu uniwersyteckiego.
 
-Technologie: React, TS, Redux, Router, Bootstrap, Prisma, MySQL, Node, JWT Token.
+Aplikacja do zarządzania zadaniami stworzona w ramach projektu uniwersyteckiego. Aplikacja pozwala na rejestrację i logowanie użytkowników, dodawanie zadań, edycję zadań, usuwanie zadań, oznaczanie zadań jako wykonane, wyświetlanie zadań w formie listy.
 
-live: https://todo-wt.vercel.app/
+Technologie: React, TS, Bootstrap, Prisma, MySQL, Node, Express, JWT Token.

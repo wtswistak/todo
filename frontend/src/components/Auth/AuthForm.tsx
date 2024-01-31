@@ -13,9 +13,9 @@ interface AuthFormProps {
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
-  const [email, setEmail] = useState<string>("test@test.com");
-  const [password, setPassword] = useState<string>("testqwerty");
-  const [username, setUsername] = useState<string>("test");
+  const [email, setEmail] = useState<string>("tester12@test.com");
+  const [password, setPassword] = useState<string>("tester12");
+  const [username, setUsername] = useState<string>("tester12");
   const [message, setMessage] = useState<string>("");
   const { handleFetch } = useFetch();
 
